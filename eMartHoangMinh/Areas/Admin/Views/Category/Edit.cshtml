@@ -1,6 +1,6 @@
 ﻿@model eMartHoangMinh.Models.FE.Category
 @{
-    ViewBag.Title = "Create category";
+    ViewBag.Title = "Edit category";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,7 +15,7 @@
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="/admin/category">Danh mục</a></li>
-                    <li class="breadcrumb-item active">Thêm mới</li>
+                    <li class="breadcrumb-item active">Cập nhật danh mục</li>
                 </ol>
             </div>
         </div>
@@ -26,13 +26,14 @@
 <section class="content">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Category info</h3>
+            <h3 class="card-title">Thông tin danh mục</h3>
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("Create", "Category", FormMethod.Post, new { }))
+            @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
+                @Html.HiddenFor(x => x.ID)
                 <div class="bs-stepper-content">
                     <div class="form-group">
                         <label for="Name">Name</label>
@@ -57,11 +58,11 @@
                     </div>
                     <div class="form-group">
                         <label for="Position">Position</label>
-                        @Html.TextBoxFor(x => x.Position, new { @class = "form-control", @value = 1, @type = "number", @id = "inputSpentBudget" })
+                        @Html.TextBoxFor(x => x.Position, new { @class = "form-control", @value = Model.Position, @type = "number", @id = "inputSpentBudget" })
                     </div>
                     <div class="form-group">
                         <a href="#" class="btn btn-secondary">Hủy</a>
-                        <input type="submit" formaction="Edit" value="Lưu" class="btn btn-success">
+                        <input type="submit" formaction="Create" value="Lưu" class="btn btn-success">
                     </div>
                 </div>
             }

@@ -1,7 +1,9 @@
 ﻿using eMartHoangMinh.Models;
 using eMartHoangMinh.Models.FE;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,7 +42,7 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                    category.UpdateDate = category.CreateDate = DateTime.Now.Date;
                     _db.Categories.Add(category);
                     _db.SaveChanges();
                 }
@@ -55,17 +57,23 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
         // GET: Admin/Category/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var category = _db.Categories.Find(id);
+            if (category != null)
+            {
+                return View(category);
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Admin/Category/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Category category)
         {
             try
             {
-                // TODO: Add update logic here
-
+                category.UpdateDate = DateTime.Now.Date;
+                _db.Categories.AddOrUpdate(category);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -77,7 +85,13 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
         // GET: Admin/Category/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var category = _db.Categories.Find(id);
+            if (category != null)
+            {
+                _db.Categories.Remove(category);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: Admin/Category/Delete/5

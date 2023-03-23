@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<eMartHoangMinh.Models.FE.Category>
 @{
-    ViewBag.Title = "Danh mục";
+    ViewBag.Title = "Category";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,12 +9,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý danh mục</h1>
+                <h1>Manage Category</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Danh mục</li>
+                    <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
+                    <li class="breadcrumb-item active">Category</li>
                 </ol>
             </div>
         </div>
@@ -27,10 +27,10 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách danh mục</h3>
+            <h3 class="card-title">List Category</h3>
 
             <div class="card-tools">
-                <a href="/admin/category/create" class="btn btn-primary">Thêm mới</a>
+                <a href="/admin/category/create" class="btn btn-primary">Create new</a>
 
             </div>
         </div>
@@ -38,24 +38,33 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th colspan="2">STT</th>
-                        <th colspan="6">Tên danh mục</th>
-                        <th colspan="2">Vị trí</th>
+                        <th>No.</th>
+                        <th>Category Name</th>
+                        <th>Position</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="6"></td>
-                            <td colspan="2"></td>
-                        </tr>
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.Name</td>
+                                <td>@item.Position</td>
+                                <td>
+                                    <a href="/admin/category/edit/@item.ID" class="btn btn-sm btn-primary">Edit</a> 
+                                    <a href="/admin/category/delete/@item.ID" class="btn btn-sm btn-danger">Delete</a> 
+                                </td>
+                            </tr>
+                            i++;
+                        }
                     }
                     else
                     {
                         <tr>
-                            <td colspan="10">Không có dữ liệu danh mục !!!</td>
+                            <td colspan="10">Not record data !!!</td>
                         </tr>
                     }
                 </tbody>

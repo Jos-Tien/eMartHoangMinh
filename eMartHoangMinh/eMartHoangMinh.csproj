@@ -168,6 +168,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -177,6 +180,14 @@
     <Compile Include="Migrations\202303230301171_create_db.cs" />
     <Compile Include="Migrations\202303230301171_create_db.designer.cs">
       <DependentUpon>202303230301171_create_db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303230854084_update_category.cs" />
+    <Compile Include="Migrations\202303230854084_update_category.designer.cs">
+      <DependentUpon>202303230854084_update_category.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303230859193_UpdateCategory.cs" />
+    <Compile Include="Migrations\202303230859193_UpdateCategory.designer.cs">
+      <DependentUpon>202303230859193_UpdateCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2180,6 +2191,13 @@
     <Content Include="Content\clients\plugins\summernote\summernote.js.map" />
     <Content Include="Content\clients\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\clients\plugins\toastr\toastr.js.map" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PartialSidebar.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2228,6 +2246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2245,6 +2264,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202303230301171_create_db.resx">
       <DependentUpon>202303230301171_create_db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303230854084_update_category.resx">
+      <DependentUpon>202303230854084_update_category.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303230859193_UpdateCategory.resx">
+      <DependentUpon>202303230859193_UpdateCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

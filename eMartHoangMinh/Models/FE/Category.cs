@@ -18,10 +18,22 @@ namespace eMartHoangMinh.Models.FE
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
+        [Required(ErrorMessage = "Field required")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Field required")]
+        [StringLength(1000,ErrorMessage ="Description max length 1000 char")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Field required")]
+        [StringLength(100, ErrorMessage = "Description max length 100 char")]
         public string SeoName { get; set; }
+        [StringLength(1000, ErrorMessage = "Description max length 1000 char")]
         public string SeoDescription { get; set; }
+
+        [Required(ErrorMessage = "Field required")]
+        [StringLength(100, ErrorMessage = "Description max length 1000 char")]
         public string SeoKeywords { get; set; }
         public int Position { get; set; }
 

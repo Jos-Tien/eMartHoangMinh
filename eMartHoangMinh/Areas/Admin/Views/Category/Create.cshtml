@@ -1,0 +1,78 @@
+﻿@model eMartHoangMinh.Models.FE.Category
+@{
+    ViewBag.Title = "Create category";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*header*@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Create category</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/category">Danh mục</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*main*@
+<section class="content">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Category info</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "Category", FormMethod.Post, new { }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="bs-stepper-content">
+                    <div class="form-group">
+                        <label for="Name">Name</label>
+                        @Html.TextBoxFor(x => x.Name, new{ @class="form-control", @placeholder="Category name", @type="text", @id="inputName"})
+                        @Html.ValidationMessageFor(x => x.Name, null, new{ @class="text-danger"})
+                        @*<input type="text" id="inputName" class="form-control">*@
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        @Html.TextAreaFor(x => x.Description, new{@class="form-control", @placeholder = "This is category....", @id= "inputDescription", @rows = "4" })
+                        @*<textarea id="inputDescription" class="form-control" rows="4"></textarea>*@
+                    </div>
+                    <div class="form-group">
+                        <label for="SeoName">Seo Name</label>
+                        @Html.TextBoxFor(x => x.SeoName, new { @class = "form-control", @placeholder = "Seo name", @type = "text", @id = "inputSeoName" })
+                        @*<input type="text" id="inputSeoName" class="form-control">*@
+                    </div>
+                    <div class="form-group">
+                        <label for="SeoDescription">Seo Description</label>
+                        @Html.TextAreaFor(x => x.SeoDescription, new { @class = "form-control", @placeholder = "This is seo description....", @id = "inputSeoDescription", @rows = "4" })
+                        @*<textarea id="inputDescription" class="form-control" rows="4"></textarea>*@
+                    </div>
+                    <div class="form-group">
+                        <label for="SeoKeywords">Seo Keywords</label>
+                        @Html.TextAreaFor(x => x.SeoKeywords, new { @class = "form-control", @placeholder = "This is keywords for seo....", @id = "inputKeywords", @rows = "4" })
+                        @*<textarea id="inputKeywords" class="form-control" rows="4"></textarea>*@
+                    </div>
+                    <div class="form-group">
+                        <label for="Position">Position</label>
+                        @Html.TextBoxFor(x => x.Position, new { @class = "form-control", @value=1, @type = "number", @id = "inputSpentBudget" })
+                        @*<input type="number" id="inputSpentBudget" class="form-control">*@
+                    </div>
+                </div>
+                <div class="col-12">
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" formaction="Create" value="Create" class="btn btn-success float-right">
+                </div>
+            }
+
+        </div>
+    </div>
+
+</section>

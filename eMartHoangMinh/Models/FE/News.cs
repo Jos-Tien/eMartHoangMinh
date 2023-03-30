@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace eMartHoangMinh.Models.FE
 {
@@ -14,6 +15,7 @@ namespace eMartHoangMinh.Models.FE
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+        [AllowHtml]
         public string Detail { get; set; } 
         public string Description { get; set; }
         public string Image { get; set; }

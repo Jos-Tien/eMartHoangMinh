@@ -160,7 +160,7 @@
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
                 <img src="~/Content/clients/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Hoàng Minh eMart</span>
             </a>
 
             <!-- Sidebar -->
@@ -212,6 +212,8 @@
     <script src="~/Content/clients/plugins/dropzone/min/dropzone.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/clients/dist/js/adminlte.min.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckfinder/ckfinder.js"></script>
     <!-- AdminLTE for demo purposes -->
     @*<script src="~/Content/clients/dist/js/demo.js"></script>*@
     <!-- Page specific script -->
@@ -347,6 +349,14 @@
         document.querySelector("#actions .cancel").onclick = function () {
             myDropzone.removeAllFiles(true)
         }
-          // DropzoneJS Demo Code End</script>
+
+        $(document).ready(function () {
+            CKEDITOR.replace('inputNewsDetail', {
+                customConfig: '~/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+
+    </script>
 </body>
 </html>

@@ -1,0 +1,87 @@
+﻿@model eMartHoangMinh.Models.FE.News
+@{
+    ViewBag.Title = "Thêm mới tin tức";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+
+@*header*@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm mới tin tức</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/news">Tin tức</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*main*@
+<section class="content">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin tin tức</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "News", FormMethod.Post, new { }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="bs-stepper-content">
+                    <div class="form-group">
+                        <label for="Name">Tiêu đề</label>
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Tiêu đề", @type = "text", @id = "inputTitle" })
+                        @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Detail">Chi tiết</label>
+                        @Html.TextBoxFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết", @id = "inputNewsDetail", @rows = "4" })
+                        <script>CKEDITOR.replace("inputNewsDetail");</script>
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Mô tải</label>
+                        @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mô tả", @id = "inputDescription", @rows = "4" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Ảnh</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                @Html.TextBoxFor(x => x.Image, new { @id = "txtImage", @class = "form-control" })
+                            </div>
+                            <div class="input-group-append">
+                                <input type="button" value="Tải ảnh" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SeoTitle">Tiêu đề SEO</label>
+                        @Html.TextBoxFor(x => x.SeoTitle, new { @class = "form-control", @placeholder = "Tiêu đề SEO", @type = "text", @id = "inputTitleSeo" })
+                    </div>
+                    <div class="form-group">
+                        <label for="SeoDescription">Mô tả SEO</label>
+                        @Html.TextAreaFor(x => x.SeoDescription, new { @class = "form-control", @placeholder = "Mô tả SEO", @id = "inputSeoDescription", @rows = "4" })
+                    </div>
+                    <div class="form-group">
+                        <label for="SeoKeywords">Từ khóa SEO</label>
+                        @Html.TextAreaFor(x => x.SeoKeywords, new { @class = "form-control", @placeholder = "Từ khóa", @id = "inputKeywords", @rows = "4" })
+                    </div>
+                    <div class="form-group">
+                        <a href="#" class="btn btn-secondary">Hủy</a>
+                        <input type="submit" formaction="Edit" value="Lưu" class="btn btn-success">
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+

@@ -7,13 +7,13 @@ namespace eMartHoangMinh.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class update_category : IMigrationMetadata
+    public sealed partial class CreateDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(update_category));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "202303230854084_update_category"; }
+            get { return "202303300849352_CreateDB"; }
         }
         
         string IMigrationMetadata.Source

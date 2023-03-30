@@ -182,17 +182,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303230301171_create_db.cs" />
-    <Compile Include="Migrations\202303230301171_create_db.designer.cs">
-      <DependentUpon>202303230301171_create_db.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202303230854084_update_category.cs" />
-    <Compile Include="Migrations\202303230854084_update_category.designer.cs">
-      <DependentUpon>202303230854084_update_category.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202303230859193_UpdateCategory.cs" />
-    <Compile Include="Migrations\202303230859193_UpdateCategory.designer.cs">
-      <DependentUpon>202303230859193_UpdateCategory.cs</DependentUpon>
+    <Compile Include="Migrations\202303300849352_CreateDB.cs" />
+    <Compile Include="Migrations\202303300849352_CreateDB.designer.cs">
+      <DependentUpon>202303300849352_CreateDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -3113,6 +3105,7 @@
     <Content Include="Content\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Content\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
+    <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3178,14 +3171,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202303230301171_create_db.resx">
-      <DependentUpon>202303230301171_create_db.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303230854084_update_category.resx">
-      <DependentUpon>202303230854084_update_category.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303230859193_UpdateCategory.resx">
-      <DependentUpon>202303230859193_UpdateCategory.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202303300849352_CreateDB.resx">
+      <DependentUpon>202303300849352_CreateDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

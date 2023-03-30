@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class create_db : DbMigration
+    public partial class CreateDB : DbMigration
     {
         public override void Up()
         {
@@ -29,11 +29,11 @@
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                        SeoName = c.String(),
-                        SeoDescription = c.String(),
-                        SeoKeywords = c.String(),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false, maxLength: 1000),
+                        SeoName = c.String(nullable: false, maxLength: 100),
+                        SeoDescription = c.String(maxLength: 1000),
+                        SeoKeywords = c.String(nullable: false, maxLength: 100),
                         Position = c.Int(nullable: false),
                         CreateBy = c.String(),
                         CreateDate = c.DateTime(nullable: false),
@@ -257,6 +257,8 @@
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FullName = c.String(),
+                        Phone = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),

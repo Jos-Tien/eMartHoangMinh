@@ -53,13 +53,14 @@
                         {
                             <tr>
                                 <td>@i</td>
+                                <td><img src="@item.Image" width="50" /></td>
                                 <td>@item.Name</td>
-                                <td>@item.Image</td>
-                                <td>@item.CreateDate</td>
+                                <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
                                 <td>@item.CreateBy</td>
                                 <td>
-                                    <a href="/admin/news/edit/@item.Id" class="btn btn-sm btn-primary float-right">Sửa</a>
                                     <a href="/admin/news/delete/@item.Id" class="btn btn-sm btn-danger float-right">Xóa</a>
+                                    <a href="/admin/news/edit/@item.Id" class="btn btn-sm btn-primary float-right">Sửa</a>
+                                    <a href="/admin/news/detail/@item.Id" class="btn btn-sm btn-dark float-right">Xem</a>
                                 </td>
                             </tr>
                             i++;

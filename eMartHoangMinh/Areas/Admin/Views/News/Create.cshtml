@@ -36,52 +36,74 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                <div class="bs-stepper-content">
-                    <div class="form-group">
-                        <label for="Name">Tiêu đề</label>
-                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Tiêu đề", @type = "text", @id = "inputTitle" })
-                        @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="Detail">Chi tiết</label>
-                        @Html.TextBoxFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết", @id = "inputNewsDetail", @rows = "4" })
-                        <script>CKEDITOR.replace("inputNewsDetail");</script>
-                    </div>
-                    <div class="form-group">
-                        <label for="Description">Mô tải</label>
-                        @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mô tả", @id = "inputDescription", @rows = "4" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">Ảnh</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                @Html.TextBoxFor(x => x.Image, new { @id = "txtImage", @class = "form-control" })
-                            </div>
-                            <div class="input-group-append">
-                                <input type="button" value="Tải ảnh" />
-                            </div>
+            <div class="bs-stepper-content">
+                <div class="form-group">
+                    <label for="Name">Tiêu đề</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Tiêu đề", @type = "text", @id = "inputTitle" })
+                    @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="Description">Mô tải</label>
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mô tả", @id = "inputDescription", @rows = "4" })
+                </div>
+                <div class="form-group">
+                    <label for="Detail">Chi tiết</label>
+                    @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết", @id = "inputNewsDetail", @rows = "4" })
+                    <script>CKEDITOR.replace("inputNewsDetail");</script>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Ảnh</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            @Html.TextBoxFor(x => x.Image, new { @id = "txtImage", @class = "form-control" })
+                        </div>
+                        <div class="input-group-append">
+                            <input type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="SeoTitle">Tiêu đề SEO</label>
-                        @Html.TextBoxFor(x => x.SeoTitle, new { @class = "form-control", @placeholder = "Tiêu đề SEO", @type = "text", @id = "inputTitleSeo" })
-                    </div>
-                    <div class="form-group">
-                        <label for="SeoDescription">Mô tả SEO</label>
-                        @Html.TextAreaFor(x => x.SeoDescription, new { @class = "form-control", @placeholder = "Mô tả SEO", @id = "inputSeoDescription", @rows = "4" })
-                    </div>
-                    <div class="form-group">
-                        <label for="SeoKeywords">Từ khóa SEO</label>
-                        @Html.TextAreaFor(x => x.SeoKeywords, new { @class = "form-control", @placeholder = "Từ khóa", @id = "inputKeywords", @rows = "4" })
-                    </div>
-                    <div class="form-group">
-                        <a href="#" class="btn btn-secondary">Hủy</a>
-                        <input type="submit" formaction="Edit" value="Lưu" class="btn btn-success">
-                    </div>
                 </div>
+                <div class="form-group">
+                    <label for="SeoTitle">Tiêu đề SEO</label>
+                    @Html.TextBoxFor(x => x.SeoTitle, new { @class = "form-control", @placeholder = "Tiêu đề SEO", @type = "text", @id = "inputTitleSeo" })
+                </div>
+                <div class="form-group">
+                    <label for="SeoDescription">Mô tả SEO</label>
+                    @Html.TextAreaFor(x => x.SeoDescription, new { @class = "form-control", @placeholder = "Mô tả SEO", @id = "inputSeoDescription", @rows = "4" })
+                </div>
+                <div class="form-group">
+                    <label for="SeoKeywords">Từ khóa SEO</label>
+                    @Html.TextAreaFor(x => x.SeoKeywords, new { @class = "form-control", @placeholder = "Từ khóa", @id = "inputKeywords", @rows = "4" })
+                </div>
+                <div class="form-group">
+                    <label>Danh mục</label>
+                    <select class="form-control select2" style="width: 100%;">
+                        @if (ViewBag.Categories != null)
+                        {
+                            foreach (var item in ViewBag.Categories)
+                            {
+                                <option>@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <a href="#" class="btn btn-secondary">Hủy</a>
+                    <input type="submit" formaction="Create" value="Lưu" class="btn btn-success">
+                </div>
+            </div>
             }
         </div>
     </div>
 </section>
+
+<script>
+    function BrowserServer(field) {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fieldUrl) {
+            document.getElementById(field).value = fieldUrl;
+        };
+        finder.popup();
+    }
+</script>
 
 

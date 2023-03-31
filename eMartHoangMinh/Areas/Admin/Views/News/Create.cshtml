@@ -87,6 +87,10 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="IsActive" style="padding-right:5px">Hiển thị bài viết</label>
+                    @Html.CheckBoxFor(x => x.IsActive)
+                </div>
+                <div class="form-group">
                     <a href="#" class="btn btn-secondary">Hủy</a>
                     <input type="submit" formaction="Create" value="Lưu" class="btn btn-success">
                 </div>

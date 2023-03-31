@@ -51,6 +51,12 @@
       <HintPath>Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -182,9 +188,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Migrations\202303300849352_CreateDB.cs" />
     <Compile Include="Migrations\202303300849352_CreateDB.designer.cs">
       <DependentUpon>202303300849352_CreateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303310212266_UpdateNews.cs" />
+    <Compile Include="Migrations\202303310212266_UpdateNews.designer.cs">
+      <DependentUpon>202303310212266_UpdateNews.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2994,6 +3005,7 @@
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -3173,6 +3185,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202303300849352_CreateDB.resx">
       <DependentUpon>202303300849352_CreateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303310212266_UpdateNews.resx">
+      <DependentUpon>202303310212266_UpdateNews.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

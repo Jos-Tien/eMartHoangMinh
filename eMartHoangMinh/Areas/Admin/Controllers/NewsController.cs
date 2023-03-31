@@ -33,6 +33,7 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
         {
             ViewBag.Categories = _db.Categories.ToList();
             var model = new News();
+            model.IsActive = true;
             return View(model);
         }
 
@@ -47,6 +48,7 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
                     news.CreateDate = news.UpdateDate = DateTime.Now.Date;
                     news.CreateBy = "Hoàng Minh";
                     news.CategoryId = 1;
+                    news.Alias = Helpers.Helper.Instance.RemoveSign4VietnameseString(news.Name);
                     _db.News.Add(news);
                     _db.SaveChanges();
                 }
@@ -87,26 +89,17 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/News/Delete/5
+        [HttpPost]
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: Admin/News/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            var news = _db.News.Find(id);
+            if (news != null)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                _db.News.Remove(news);
+                _db.SaveChanges();
+                return View("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return Json(new {succes = false});
         }
     }
 }

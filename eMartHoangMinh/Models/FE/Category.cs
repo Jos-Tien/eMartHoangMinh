@@ -36,6 +36,7 @@ namespace eMartHoangMinh.Models.FE
         [StringLength(100, ErrorMessage = "Description max length 1000 char")]
         public string SeoKeywords { get; set; }
         public int Position { get; set; }
+        public string Alias { get; set; }
 
         public ICollection<News> News { get; set; }
         public ICollection<Post> Posts { get; set; }

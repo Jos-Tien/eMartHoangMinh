@@ -23,6 +23,8 @@ namespace eMartHoangMinh.Models.FE
         public string SeoTitle { get; set; }
         public string SeoKeywords { get; set; }
         public string SeoDescription { get; set; }
+        public bool IsActive { get; set; }
+        public string Alias { get; set; }
 
         public virtual Category Category { get; set; }
 

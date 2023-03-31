@@ -4,7 +4,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -18,13 +17,10 @@
                 </ol>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 
-<!-- Main content -->
 <section class="content">
-
-    <!-- Default box -->
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">List Category</h3>
@@ -37,12 +33,14 @@
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>STT</th>
                         <th>Tiêu đề</th>
                         <th>Hình ảnh</th>
                         <th>Ngày tạo</th>
                         <th>Người tạo</th>
+                        <th>Hiển thị</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,14 +49,16 @@
                         var i = 1;
                         foreach (var item in Model)
                         {
-                            <tr>
+                            var strDisplay = item.IsActive ? "<a href='#'><i class='fa fa-check text-success'></i></a>" : "<a href='#'><i class='fas fa-times text-danger'></i></a>";
+                            <tr class="text-center" id="trow_@item.Id">
                                 <td>@i</td>
                                 <td><img src="@item.Image" width="50" /></td>
                                 <td>@item.Name</td>
                                 <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
                                 <td>@item.CreateBy</td>
+                                <td>@Html.Raw(strDisplay)</td>
                                 <td>
-                                    <a href="/admin/news/delete/@item.Id" class="btn btn-sm btn-danger float-right">Xóa</a>
+                                    <a href="#" data-id="@item.Id" onclick="DeleteNews(@item.Id)" class="btn btn-sm btn-danger btnDelete float-right">Xóa</a>
                                     <a href="/admin/news/edit/@item.Id" class="btn btn-sm btn-primary float-right">Sửa</a>
                                     <a href="/admin/news/detail/@item.Id" class="btn btn-sm btn-dark float-right">Xem</a>
                                 </td>
@@ -75,13 +75,26 @@
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
         <div class="card-footer">
-
         </div>
-        <!-- /.card-footer-->
     </div>
-    <!-- /.card -->
-
 </section>
-<!-- /.content -->
+
+<script>
+    function DeleteNews(id) {
+        var finder = new CKFinder();
+        var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+        if (conf === true) {
+            $.ajax({
+                url: 'delete',
+                type: 'POST',
+                data: { id: id },
+                success: function (rs) {
+                    if (rs.success === false) {
+                        alert('Xóa bản ghi không thành công.');
+                    }
+                }
+            });
+        }
+    }
+</script>

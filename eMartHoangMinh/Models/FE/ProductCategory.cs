@@ -20,6 +20,7 @@ namespace eMartHoangMinh.Models.FE
         public string Name { get; set; }
         public string Description { get; set; }
         public string SeoName { get; set; }
+        public string Alias { get; set; }
         public string Icon { get; set; }
         public string SeoDescription { get; set; }
         public string SeoKeywords { get; set; }

@@ -1,6 +1,6 @@
-﻿@model eMartHoangMinh.Models.FE.Category
+﻿@model eMartHoangMinh.Models.FE.ProductCategory
 @{
-    ViewBag.Title = "Edit category";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,15 +13,14 @@
             <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/category" class="nav-link">Danh mục</a>
+            <a href="/admin/productcategory" class="nav-link">Danh mục sản phẩm</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link active">Sửa danh mục</a>
+            <a href="#" class="nav-link active">Sửa danh mục sản phẩm</a>
         </li>
     </ul>
 }
 
-@*header*@
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -31,22 +30,21 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="/admin/category">Danh mục</a></li>
-                    <li class="breadcrumb-item active">Cập nhật danh mục</li>
+                    <li class="breadcrumb-item"><a href="/admin/productcategory">Danh mục sản phẩm</a></li>
+                    <li class="breadcrumb-item active">Cập nhật danh mục sản phẩm</li>
                 </ol>
             </div>
         </div>
     </div>
 </section>
 
-@*main*@
 <section class="content">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Thông tin danh mục</h3>
+            <h3 class="card-title">Thông tin danh mục sản phẩm</h3>
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { }))
+            @using (Html.BeginForm("Edit", "ProductCategory", FormMethod.Post, new { }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
@@ -78,13 +76,12 @@
                         @Html.TextBoxFor(x => x.Position, new { @class = "form-control", @value = 1, @type = "number", @id = "inputSpentBudget" })
                     </div>
                     <div class="form-group">
-                        <a href="#" class="btn btn-secondary">Hủy</a>
+                        <a href="/admin/productcategory" class="btn btn-secondary">Hủy</a>
                         <input type="submit" formaction="Edit" value="Lưu" class="btn btn-success">
                     </div>
                 </div>
             }
-
         </div>
     </div>
-
 </section>
+

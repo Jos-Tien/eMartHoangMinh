@@ -1,6 +1,6 @@
-﻿@model eMartHoangMinh.Models.FE.News
+﻿@model eMartHoangMinh.Models.FE.Post
 @{
-    ViewBag.Title = "Sửa tin tin";
+    ViewBag.Title = "Thêm mới bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,10 +16,10 @@
             <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/news" class="nav-link">Tin tức</a>
+            <a href="/admin/posts" class="nav-link">Bài viết</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link active">Sửa tin tức</a>
+            <a href="#" class="nav-link active">Tạo Tạo bài viết</a>
         </li>
     </ul>
 }
@@ -29,13 +29,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Sửa tin tức</h1>
+                <h1>Thêm mới bài viết</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="/admin/news">Tin tức</a></li>
-                    <li class="breadcrumb-item active">Sửa tin tức</li>
+                    <li class="breadcrumb-item"><a href="/admin/posts">Bài viết</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
                 </ol>
             </div>
         </div>
@@ -46,16 +46,13 @@
 <section class="content">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Thông tin tin tức</h3>
+            <h3 class="card-title">Thông tin bài viết</h3>
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { }))
+            @using (Html.BeginForm("Create", "Posts", FormMethod.Post, new { }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                @Html.HiddenFor(x => x.Id)
-                @Html.HiddenFor(x => x.CategoryId)
-                @Html.HiddenFor(x => x.Category)
                 <div class="bs-stepper-content">
                     <div class="form-group">
                         <label for="Name">Tiêu đề</label>
@@ -68,8 +65,8 @@
                     </div>
                     <div class="form-group">
                         <label for="Detail">Chi tiết</label>
-                        @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết", @id = "inputNewsDetail", @rows = "4" })
-                        <script>CKEDITOR.replace("inputNewsDetail");</script>
+                        @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết", @id = "inputPostDetail", @rows = "4" })
+                        <script>CKEDITOR.replace("inputPostDetail");</script>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Ảnh</label>
@@ -99,7 +96,6 @@
                         <select class="form-control select2" style="width: 100%;">
                             @if (ViewBag.Categories != null)
                             {
-                                <option selected="selected">@Model.Category.Name</option>
                                 foreach (var item in ViewBag.Categories)
                                 {
                                     <option>@item.Name</option>
@@ -112,7 +108,7 @@
                         @Html.CheckBoxFor(x => x.IsActive)
                     </div>
                     <div class="form-group">
-                        <a href="admin/news" class="btn btn-secondary">Hủy</a>
+                        <a class="btn btn-secondary">Hủy</a>
                         <input type="submit" formaction="Create" value="Lưu" class="btn btn-success">
                     </div>
                 </div>
@@ -130,3 +126,5 @@
         finder.popup();
     }
 </script>
+
+

@@ -48,7 +48,7 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
                     news.CreateDate = news.UpdateDate = DateTime.Now.Date;
                     news.CreateBy = "Hoàng Minh";
                     news.CategoryId = 1;
-                    news.Alias = Helpers.Helper.Instance.RemoveSign4VietnameseString(news.Name);
+                    news.Alias = Helpers.Helper.Instance.RemoveSign4VietnameseString(news.SeoTitle);
                     _db.News.Add(news);
                     _db.SaveChanges();
                 }
@@ -97,7 +97,7 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
             {
                 _db.News.Remove(news);
                 _db.SaveChanges();
-                return View("Index");
+                return Json(new { success = true });
             }
             return Json(new {succes = false});
         }

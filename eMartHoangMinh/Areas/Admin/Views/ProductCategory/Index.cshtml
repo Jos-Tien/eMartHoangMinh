@@ -1,6 +1,6 @@
-﻿@model IEnumerable<eMartHoangMinh.Models.FE.Category>
+﻿@model IEnumerable<eMartHoangMinh.Models.FE.ProductCategory>
 @{
-    ViewBag.Title = "Quản lý danh mục";
+    ViewBag.Title = "Quản lý danh mục sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,10 +10,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/home" class="nav-link">Trang chủ</a>
+            <a href="#" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link active">Danh mục</a>
+            <a href="/admin/productcategory" class="nav-link active">Danh mục sản phẩm</a>
         </li>
     </ul>
 }
@@ -28,7 +28,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Danh mục</li>
+                    <li class="breadcrumb-item active">Danh mục sản phẩm</li>
                 </ol>
             </div>
         </div>
@@ -41,10 +41,10 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách danh mục</h3>
+            <h3 class="card-title">Danh sách danh mục sản phẩm</h3>
 
             <div class="card-tools">
-                <a href="/admin/category/create" class="btn btn-primary">Tạo mới</a>
+                <a href="/admin/productcategory/create" class="btn btn-primary">Tạo mới</a>
 
             </div>
         </div>
@@ -52,9 +52,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr class="text-center">
-                        <th>STT</th>
-                        <th>Tên danh mục</th>
+                        <th class="col-1">STT</th>
+                        <th>Tiêu đề</th>
                         <th>Vị trí</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,8 +69,8 @@
                                 <td>@item.Name</td>
                                 <td>@item.Position</td>
                                 <td>
-                                    <a href="/admin/category/edit/@item.ID" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger" onclick="DeleteCategory(@item.ID)">Xóa</a>
+                                    <a href="/admin/productcategory/edit/@item.ID" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="#" onclick="DeleteProductCategory(@item.ID)" class="btn btn-sm btn-danger">Xóa</a>
                                 </td>
                             </tr>
                             i++;
@@ -88,8 +89,9 @@
         </div>
     </div>
 </section>
+
 <script>
-    function DeleteCategory(id) {
+    function DeleteProductCategory(id) {
         var conf = confirm('Bạn có muốn xóa bản ghi này không?');
         if (conf === true) {
             $.ajax({

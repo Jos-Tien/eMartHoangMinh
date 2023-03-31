@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace eMartHoangMinh.Models.FE
 {
@@ -14,6 +15,7 @@ namespace eMartHoangMinh.Models.FE
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
+        [AllowHtml]
         public string Detail { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
@@ -21,6 +23,8 @@ namespace eMartHoangMinh.Models.FE
         public string SeoTitle { get; set; }
         public string SeoKeywords { get; set; }
         public string SeoDescription { get; set; }
+        public bool IsActive { get; set; } = true;
+        public string Alias { get; set; }
 
         public virtual Category Category { get; set; }
     }

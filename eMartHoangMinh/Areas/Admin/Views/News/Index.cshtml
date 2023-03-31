@@ -4,6 +4,20 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+@section leftNavbar{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link active">Tin tức</a>
+        </li>
+    </ul>
+}
+
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -23,7 +37,7 @@
 <section class="content">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">List Category</h3>
+            <h3 class="card-title">Danh sách tin tức</h3>
 
             <div class="card-tools">
                 <a href="/admin/news/create" class="btn btn-primary">Tạo mới</a>
@@ -82,7 +96,6 @@
 
 <script>
     function DeleteNews(id) {
-        var finder = new CKFinder();
         var conf = confirm('Bạn có muốn xóa bản ghi này không?');
         if (conf === true) {
             $.ajax({
@@ -90,8 +103,9 @@
                 type: 'POST',
                 data: { id: id },
                 success: function (rs) {
-                    if (rs.success === false) {
+                    if (rs.success === true) {
                         alert('Xóa bản ghi không thành công.');
+                        $('#trow_' + id).remove();
                     }
                 }
             });

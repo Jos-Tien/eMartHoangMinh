@@ -1,6 +1,8 @@
-﻿@model IEnumerable<eMartHoangMinh.Models.FE.Category>
+﻿@model PagedList.PagedList<eMartHoangMinh.Models.FE.Product>
+@using PagedList.Mvc;
+@using PagedList;
 @{
-    ViewBag.Title = "Quản lý danh mục";
+    ViewBag.Title = "Sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,38 +15,34 @@
             <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link active">Danh mục</a>
+            <a href="#" class="nav-link active">Sản phẩm</a>
         </li>
     </ul>
 }
 
-<!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý danh mục</h1>
+                <h1>Quản lý sản phẩm</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Danh mục</li>
+                    <li class="breadcrumb-item active">Sản phẩm</li>
                 </ol>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 
-<!-- Main content -->
 <section class="content">
-
-    <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách danh mục</h3>
+            <h3 class="card-title">Danh sách sản phẩm</h3>
 
             <div class="card-tools">
-                <a href="/admin/category/create" class="btn btn-primary">Tạo mới</a>
+                <a href="/admin/products/create" class="btn btn-primary">Tạo mới</a>
 
             </div>
         </div>
@@ -53,8 +51,10 @@
                 <thead>
                     <tr class="text-center">
                         <th>STT</th>
-                        <th>Tên danh mục</th>
-                        <th>Vị trí</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá bán</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,13 +63,15 @@
                         var i = 1;
                         foreach (var item in Model)
                         {
-                            <tr class="text-center" id="trow_@item.ID">
+                            <tr class="text-center" id="trow_@item.Id">
                                 <td>@i</td>
                                 <td>@item.Name</td>
-                                <td>@item.Position</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price</td>
                                 <td>
-                                    <a href="/admin/category/edit/@item.ID" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger" onclick="DeleteCategory(@item.ID)">Xóa</a>
+                                    <a href="#" data-id="@item.Id" onclick="DeleteProduct(@item.Id)" class="btn btn-sm btn-danger float-right">Xóa</a>
+                                    <a href="/admin/products/edit/@item.Id" class="btn btn-sm btn-primary float-right">Sửa</a>
+                                    <a href="/admin/products/detail/@item.Id" class="btn btn-sm btn-dark float-right">Xem</a>
                                 </td>
                             </tr>
                             i++;
@@ -78,28 +80,28 @@
                     else
                     {
                         <tr>
-                            <td colspan="10">Không có dữ liệu !!!</td>
+                            <td colspan="10">Không có bài viết !!!</td>
                         </tr>
                     }
                 </tbody>
             </table>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
         <div class="card-footer">
         </div>
     </div>
 </section>
+
 <script>
-    function DeleteCategory(id) {
+    function DeleteProduct(id) {
         var conf = confirm('Bạn có muốn xóa bản ghi này không?');
         if (conf === true) {
             $.ajax({
-                url: 'delete',
+                url: '/posts/delete',
                 type: 'POST',
                 data: { id: id },
                 success: function (rs) {
-                    debugger
                     if (rs.success === true) {
-                        alert('Xóa bản ghi không thành công.');
                         $('#trow_' + id).remove();
                     }
                 }
@@ -107,3 +109,4 @@
         }
     }
 </script>
+

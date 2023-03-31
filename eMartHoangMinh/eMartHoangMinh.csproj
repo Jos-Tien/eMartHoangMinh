@@ -182,6 +182,9 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -196,6 +199,18 @@
     <Compile Include="Migrations\202303310212266_UpdateNews.cs" />
     <Compile Include="Migrations\202303310212266_UpdateNews.designer.cs">
       <DependentUpon>202303310212266_UpdateNews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303310356384_UpdatePost.cs" />
+    <Compile Include="Migrations\202303310356384_UpdatePost.designer.cs">
+      <DependentUpon>202303310356384_UpdatePost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303310623162_UpdateProduct.cs" />
+    <Compile Include="Migrations\202303310623162_UpdateProduct.designer.cs">
+      <DependentUpon>202303310623162_UpdateProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303310740135_UpdateProductCategory.cs" />
+    <Compile Include="Migrations\202303310740135_UpdateProductCategory.designer.cs">
+      <DependentUpon>202303310740135_UpdateProductCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -3118,6 +3133,14 @@
     <Content Include="Content\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Posts\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Posts\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3188,6 +3211,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202303310212266_UpdateNews.resx">
       <DependentUpon>202303310212266_UpdateNews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303310356384_UpdatePost.resx">
+      <DependentUpon>202303310356384_UpdatePost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303310623162_UpdateProduct.resx">
+      <DependentUpon>202303310623162_UpdateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303310740135_UpdateProductCategory.resx">
+      <DependentUpon>202303310740135_UpdateProductCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

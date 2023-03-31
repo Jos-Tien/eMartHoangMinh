@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace eMartHoangMinh.Models.FE
 {
@@ -15,8 +16,10 @@ namespace eMartHoangMinh.Models.FE
         public int Id { get; set; }
         public string Name { get; set; }
         public string ProductCode { get; set; }
+        [AllowHtml]
         public string Detail { get; set; }
         public string Description { get; set; }
+        public string Alias { get; set; }
         public string Image { get; set; }
         public int ProductCategoryId { get; set; }
         public string SeoTitle { get; set; }

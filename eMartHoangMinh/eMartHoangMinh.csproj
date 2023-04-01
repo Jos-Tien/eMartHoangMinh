@@ -212,6 +212,10 @@
     <Compile Include="Migrations\202303310740135_UpdateProductCategory.designer.cs">
       <DependentUpon>202303310740135_UpdateProductCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304010301523_UpdateProduct1.cs" />
+    <Compile Include="Migrations\202304010301523_UpdateProduct1.designer.cs">
+      <DependentUpon>202304010301523_UpdateProduct1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FE\Adv.cs" />
@@ -3025,6 +3029,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\autoNumeric\autoNumeric-min.js" />
+    <Content Include="Scripts\autoNumeric\autoNumeric.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\clients\dist\css\adminlte.css.map" />
@@ -3152,6 +3158,22 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\images\02aa3ed7-dau-tay-da-lat-1.jpg" />
+    <Content Include="Uploads\images\2.jpg" />
+    <Content Include="Uploads\images\Ajuma_buoi_dien_20220105073525048.jpg" />
+    <Content Include="Uploads\images\download.jpg" />
+    <Content Include="Uploads\images\indonesia-u20-world-cup-2023-16801527762301253406980.jpg" />
+    <Content Include="Uploads\images\saurieng4-7973-1189.jpeg" />
+    <Content Include="Uploads\images\shopping.png" />
+    <Content Include="Uploads\images\ttxvn_nhanhungyen13.jpg" />
+    <Content Include="Uploads\_thumbs\Images\02aa3ed7-dau-tay-da-lat-1.jpg" />
+    <Content Include="Uploads\_thumbs\Images\2.jpg" />
+    <Content Include="Uploads\_thumbs\Images\Ajuma_buoi_dien_20220105073525048.jpg" />
+    <Content Include="Uploads\_thumbs\Images\download.jpg" />
+    <Content Include="Uploads\_thumbs\Images\indonesia-u20-world-cup-2023-16801527762301253406980.jpg" />
+    <Content Include="Uploads\_thumbs\Images\saurieng4-7973-1189.jpeg" />
+    <Content Include="Uploads\_thumbs\Images\shopping.png" />
+    <Content Include="Uploads\_thumbs\Images\ttxvn_nhanhungyen13.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3191,6 +3213,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
+    <Folder Include="Uploads\files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3220,6 +3243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202303310740135_UpdateProductCategory.resx">
       <DependentUpon>202303310740135_UpdateProductCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304010301523_UpdateProduct1.resx">
+      <DependentUpon>202304010301523_UpdateProduct1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

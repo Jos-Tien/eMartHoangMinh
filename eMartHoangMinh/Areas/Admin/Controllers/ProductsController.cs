@@ -27,8 +27,8 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var pro = new Product();
-            return View(pro);
+            ViewBag.ProductCategory = new SelectList(_db.ProductCategories.ToList(),"Id", "Name");
+            return View();
         }
         [HttpPost]
         public ActionResult Create(Product product)

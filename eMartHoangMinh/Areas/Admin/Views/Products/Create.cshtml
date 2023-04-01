@@ -56,7 +56,7 @@
                     <div class="card">
                         <div class="card-header p-2">
                             <ul class="nav nav-pills">
-                                <li class="nav-item"><a class="nav-link active" href="#productInfo" data-toggle="tab">Sản phẩm</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="#productInfo" data-toggle="tab">Thông tin chung</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#productImage" data-toggle="tab">Hình ảnh</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#productSEO" data-toggle="tab">SEO</a></li>
                             </ul>
@@ -70,6 +70,15 @@
                                         @Html.ValidationMessageFor(x => x.Name, null, new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
+                                        <label for="ProductCode">Mã sản phẩm</label>
+                                        @Html.TextBoxFor(x => x.ProductCode, new { @class = "form-control", @placeholder = "Mã sản phẩm", @type = "text", @id = "inputCodes" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Danh mục sản phẩm</label>
+                                        @Html.DropDownListFor(x => x.ProductCategoryId, ViewBag.ProductCategory as SelectList, "-- Chọn danh mục sản phẩm --"
+                                                , new { @class = "form-control", @id = "inputDanhMuc", @rows = "4" })
+                                    </div>
+                                    <div class="form-group">
                                         <label for="Description">Mô tả</label>
                                         @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Mô tả", @id = "inputDescription", @rows = "4" })
                                     </div>
@@ -78,133 +87,116 @@
                                         @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết", @id = "inputDetail", @rows = "4" })
                                         <script>CKEDITOR.replace("inputDetail");</script>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="Price">Giá</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">$</span>
+
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="Quantity">Số lượng</label>
+                                                @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control", @type = "number", @placeholder = "Số lượng", @id = "inputQuantity", @rows = "4" })
                                             </div>
-                                            @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @type = "number", @placeholder = "Giá bán", @id = "inputPrice"  })
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">.00</span>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="Price">Giá</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @type = "number", @placeholder = "Giá bán", @id = "inputPrice" })
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="PriceSale">Giá sale</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    @Html.TextBoxFor(x => x.PriceSale, new { @class = "form-control", @type = "number", @placeholder = "Giá sale", @id = "inputPriceSale", @rows = "4" })
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">.00</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="PriceSale">Giá sale</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">$</span>
-                                            </div>
-                                            @Html.TextBoxFor(x => x.PriceSale, new { @class = "form-control", @type = "number", @placeholder = "Giá sale", @id = "inputPriceSale", @rows = "4" })
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">.00</span>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    @Html.CheckBoxFor(x => x.IsActive, new { @class = "custom-control-input", @id = "cbIsActive", @checked = "@checked" })
+                                                    <label for="cbIsActive" class="custom-control-label">Hiển thị</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Quantity">Số lượng</label>
-                                        @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control", @type= "number", @placeholder = "Số lượng", @id = "inputQuantity", @rows = "4" })
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    @Html.CheckBoxFor(x => x.IsHome, new { @class = "custom-control-input", @id = "cbIsHome" })
+                                                    <label for="cbIsHome" class="custom-control-label">Trang chủ</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    @Html.CheckBoxFor(x => x.IsSale, new { @class = "custom-control-input", @id = "cbIsSale" })
+                                                    <label for="cbIsSale" class="custom-control-label">Sản phẩm sale</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    @Html.CheckBoxFor(x => x.IsHot, new { @class = "custom-control-input", @id = "cbIsHot" })
+                                                    <label for="cbIsHot" class="custom-control-label">Sản phẩm hot</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    @Html.CheckBoxFor(x => x.IsFeture, new { @class = "custom-control-input", @id = "cbIsFeture" })
+                                                    <label for="cbIsFeture" class="custom-control-label">Sản phẩm sắp tới</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="productImage">
-                                    <!-- The timeline -->
-                                    <div class="timeline timeline-inverse">
-                                        <!-- timeline time label -->
-                                        <div class="time-label">
-                                            <span class="bg-danger">
-                                                10 Feb. 2014
-                                            </span>
+                                    <div class="row">
+                                        <div class="col-md-12 text-right">
+                                            <input type="button" class="btn btn-primary" id="iTaiAnh" onclick="BrowserServer()" value="Tải ảnh" />
                                         </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-envelope bg-primary"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                                                <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                                <div class="timeline-body">
-                                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                                    quora plaxo ideeli hulu weebly balihoo...
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-user bg-info"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                                <h3 class="timeline-header border-0">
-                                                    <a href="#">Sarah Young</a> accepted your friend request
-                                                </h3>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-comments bg-warning"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                                <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                                <div class="timeline-body">
-                                                    Take me to your leader!
-                                                    Switzerland is small and neutral!
-                                                    We are more like Germany, ambitious and misunderstood!
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <!-- timeline time label -->
-                                        <div class="time-label">
-                                            <span class="bg-success">
-                                                3 Jan. 2014
-                                            </span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-camera bg-purple"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                                                <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                                <div class="timeline-body">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <div>
-                                            <i class="far fa-clock bg-gray"></i>
+                                        <div class="col-md-12">
+                                            <table class="table table-hover" id="tbAnhSanPham">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>STT</th>
+                                                        <th>Ảnh</th>
+                                                        <th>Ảnh đại diện</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbHtml">
+                                                    @*<tr  class="text-center">
+                                                            <td>1</td>
+                                                            <td><img width="80" src="~/Uploads/images/02aa3ed7-dau-tay-da-lat-1.jpg" /></td>
+                                                            <td><input type="radio" name="rDefault" /></td>
+                                                            <td><a href="#" class="btn btn-sm btn-danger">Xóa</a></td>
+                                                        </tr>*@
+                                                </tbody>
+                                            </table>
+                                            <input type="hidden" id="tCurrentId" value="0" />
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.tab-pane -->
-
                                 <div class="tab-pane" id="productSEO">
                                     <form class="form-horizontal">
                                         <div class="form-group">
@@ -222,7 +214,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group float-right">
                                 <a href="#" class="btn btn-secondary">Hủy</a>
                                 <input type="submit" formaction="Create" value="Lưu" class="btn btn-success">
                             </div>
@@ -235,14 +227,52 @@
 </section>
 
 <script>
+
     function BrowserServer(field) {
         var finder = new CKFinder();
         finder.selectActionFunction = function (fieldUrl) {
-            document.getElementById(field).value = fieldUrl;
+            //document.getElementById(field).value = fieldUrl;
+            addImageProduct(fieldUrl);
         };
         finder.popup();
     }
 
+
+    function addImageProduct(url) {
+        var temp = $('#tCurrentId').val();
+        var currentId = parseInt(temp) + 1;
+        var str = "";
+        if (currentId == 1) {
+            str += `<tr class="text-center" id="trow_${currentId}">
+                <td>${currentId}</td >
+                <td><img width="80" src="${url}"/></td>
+                <td><input type="radio" value=${currentId} checked="checked" name="rDefault" /></td>
+                <td><a href="#" onclick="deleteImage(${currentId})" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                </tr>`;
+        }
+        else {
+            str += `<tr class="text-center" id="trow_${currentId}">
+                <td>${currentId}</td >
+                <td><img width="80" src="${url}"/></td>
+                <td><input type="radio" name="rDefault" /></td>
+                <td><a href="#" onclick="deleteImage(${currentId})" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                </tr>`;
+        }
+        $('#tbHtml').append(str);
+        $('#tCurrentId').val(currentId);
+    }
+
+    function deleteImage(id) {
+        var conf = confirm('Bạn có muốn xóa ảnh này không?');
+        if (conf === true) {
+            $('#trow_' + id).fadeTo('fast', 0.5, function () {
+                $(this).slideUp('fast', function () { $(this).remove(); });
+            });
+            var temp = $('#tCurrentId').val();
+            var currentId = parseInt(temp);
+            $('#tCurrentId').val(currentId);
+        }
+    }
 
 
 </script>

@@ -11,6 +11,12 @@ namespace eMartHoangMinh.Models.FE
     [Table("tb_Product")]
     public class Product : CommonAbtract
     {
+        public Product()
+        {
+            this.ProductImages = new HashSet<ProductImage>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+            this.IsActive = true;
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -26,12 +32,15 @@ namespace eMartHoangMinh.Models.FE
         public string SeoKeywords { get; set; }
         public string SeoDescription { get; set; }
         public decimal Price { get; set; }
-        public decimal PriceSale { get; set; }
+        public decimal? PriceSale { get; set; }
         public bool IsSale { get; set; }
         public bool IsHome {get; set; }
         public bool IsHot { get; set; }
         public bool IsFeture { get; set; }
         public int Quantity { get; set; }
+        public bool IsActive { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

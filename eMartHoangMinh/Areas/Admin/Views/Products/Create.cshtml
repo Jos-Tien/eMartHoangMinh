@@ -85,26 +85,29 @@
                                     <div class="form-group">
                                         <label for="Detail">Chi tiết</label>
                                         @Html.TextAreaFor(x => x.Detail, new { @class = "form-control", @placeholder = "Chi tiết", @id = "inputDetail", @rows = "4" })
-                                        <script>CKEDITOR.replace("inputDetail");</script>
+                                        @*<script>CKEDITOR.replace("inputDetail");</script>*@
                                     </div>
 
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="Quantity">Số lượng</label>
-                                                @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control", @type = "number", @placeholder = "Số lượng", @id = "inputQuantity", @rows = "4" })
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control", @type = "number", @Value="1", @id = "inputQuantity", @rows = "4" })
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">.0</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="Price">Giá</label>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                    @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @type = "number", @placeholder = "Giá bán", @id = "inputPrice" })
+                                                    <input type="text" value="0" name="demoPrice" id="demoPrice" class="form-control" data-a-dec="." data-a-sep="," />
+                                                    @Html.HiddenFor(x => x.Price)
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">.00</span>
+                                                        <span class="input-group-text">đ</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,6 +116,13 @@
                                             <div class="form-group">
                                                 <label for="PriceSale">Giá sale</label>
                                                 <div class="input-group">
+                                                    <input type="text" value="0" name="demoPriceSale" id="demoPriceSale" class="form-control" data-a-dec="." data-a-sep="," />
+                                                    @Html.HiddenFor(x => x.PriceSale)
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">đ</span>
+                                                    </div>
+                                                </div>
+                                                @*<div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">$</span>
                                                     </div>
@@ -120,7 +130,7 @@
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">.00</span>
                                                     </div>
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +147,7 @@
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
                                                     @Html.CheckBoxFor(x => x.IsHome, new { @class = "custom-control-input", @id = "cbIsHome" })
-                                                    <label for="cbIsHome" class="custom-control-label">Trang chủ</label>
+                                                    <label for="cbIsHome" class="custom-control-label">Hiển thị ở trang chủ</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,7 +181,8 @@
                                 <div class="tab-pane" id="productImage">
                                     <div class="row">
                                         <div class="col-md-12 text-right">
-                                            <input type="button" class="btn btn-primary" id="iTaiAnh" onclick="BrowserServer()" value="Tải ảnh" />
+                                            @*<input type="button" class="btn btn-primary" id="iTaiAnh" onclick="BrowserServer()" value="Tải ảnh" />*@
+                                            <input type="button" class="btn btn-primary" id="iTaiAnh" value="Tải ảnh" />
                                         </div>
                                         <div class="col-md-12">
                                             <table class="table table-hover" id="tbAnhSanPham">
@@ -184,12 +195,6 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbHtml">
-                                                    @*<tr  class="text-center">
-                                                            <td>1</td>
-                                                            <td><img width="80" src="~/Uploads/images/02aa3ed7-dau-tay-da-lat-1.jpg" /></td>
-                                                            <td><input type="radio" name="rDefault" /></td>
-                                                            <td><a href="#" class="btn btn-sm btn-danger">Xóa</a></td>
-                                                        </tr>*@
                                                 </tbody>
                                             </table>
                                             <input type="hidden" id="tCurrentId" value="0" />
@@ -226,7 +231,76 @@
     </div>
 </section>
 
-<script>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#demoPrice').autoNumeric('init');
+            $('#demoPrice').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoPrice').autoNumeric('get');
+                $('#Price').val(demoGet);
+                $('#Price').autoNumeric('set',demoGet);
+            });
+
+            $('#demoPriceSale').autoNumeric('init');
+            $('#demoPriceSale').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoPriceSale').autoNumeric('get');
+                $('#PriceSale').val(demoGet);
+                $('#PriceSale').autoNumeric('set', demoGet);
+            });
+
+            CKEDITOR.replace("inputDetail");
+
+            $('body').on('click', '.btnXoaAnh', function () {
+                var id = $(this).data('id');
+                var conf = confirm('Bạn có muốn xóa ảnh này không?');
+                if (conf === true) {
+                    $('#trow_' + id).fadeTo('fast', 0.5, function () {
+                        $(this).slideUp('fast', function () { $(this).remove(); });
+                    });
+                    var temp = $('#tCurrentId').val();
+                    var currentId = parseInt(temp);
+                    $('#tCurrentId').val(currentId);
+                }
+            });
+
+            $('body').on('click', '#iTaiAnh', function () {
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (fieldUrl) {
+                    addImageProduct(fieldUrl);
+                };
+                finder.popup();
+            })
+
+            function addImageProduct(url) {
+                var temp = $('#tCurrentId').val();
+                var currentId = parseInt(temp) + 1;
+                var str = "";
+                if (currentId == 1) {
+                    str += `<tr class="text-center" id="trow_${currentId}">
+                <td>${currentId}</td >
+                <td><img width="80" src="${url}"/><input type="hidden" value="${url}" name="Images"/></td>
+                <td><input type="radio" value=${currentId} checked="checked" name="rdDefault" /></td>
+                <td><a href="#" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                </tr>`;
+                }
+                else {
+                    str += `<tr class="text-center" id="trow_${currentId}">
+                <td>${currentId}</td >
+                <td><img width="80" src="${url}"/><input type="hidden" value="${url}" name="Images"/></td>
+                <td><input type="radio" value=${currentId} name="rdDefault" /></td>
+                <td><a href="#" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                </tr>`;
+                }
+                $('#tbHtml').append(str);
+                $('#tCurrentId').val(currentId);
+            }
+
+        });
+    </script>    
+}
+
+@*<script>
 
     function BrowserServer(field) {
         var finder = new CKFinder();
@@ -275,5 +349,5 @@
     }
 
 
-</script>
+</script>*@
 

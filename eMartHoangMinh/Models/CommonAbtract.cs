@@ -9,7 +9,7 @@ namespace eMartHoangMinh.Models
     {
         public string CreateBy { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now.Date;
-        public DateTime UpdateDate { get; set; }
+        public DateTime UpdateDate { get; set; } = DateTime.Now.Date;
         public string UpdateBy { get; set; }
     }
 }

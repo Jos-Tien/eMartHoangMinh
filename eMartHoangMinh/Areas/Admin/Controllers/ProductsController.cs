@@ -1,4 +1,5 @@
-﻿using eMartHoangMinh.Models;
+﻿using CKFinder.Settings;
+using eMartHoangMinh.Models;
 using eMartHoangMinh.Models.FE;
 using PagedList;
 using System;
@@ -31,11 +32,35 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, List<string> Images, List<int> rdDefault)
         {
             try
             {
-
+                var imageIndex = -1;
+                if (ModelState.IsValid)
+                {
+                    if (Images != null && Images.Count > 0)
+                    {
+                        for (int i = 0; i < Images.Count; i++)
+                        {
+                            var productImage = new ProductImage()
+                            {
+                                ProductId = product.Id,
+                                Image = Images[i]
+                            };
+                            if (i + 1 == rdDefault[0])
+                            {
+                                productImage.IsDefault = true;
+                                imageIndex = i;
+                            }
+                            _db.ProductImages.Add(productImage);
+                        }
+                    }
+                    product.Image = imageIndex >= 0 ? Images[imageIndex] : "";
+                    _db.Products.Add(product);
+                    _db.SaveChanges();
+                }
+                ViewBag.ProductCategory = new SelectList(_db.ProductCategories.ToList(), "Id", "Name");
                 return RedirectToAction("Index");
             }
             catch

@@ -71,7 +71,7 @@
                                 <td>@item.Quantity</td>
                                 <td>@item.Price</td>
                                 <td>
-                                    <a href="#" data-id="@item.Id" onclick="DeleteProduct(@item.Id)" class="btn btn-sm btn-danger">Xóa</a>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                     <a href="/admin/products/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="/admin/products/detail/@item.Id" class="btn btn-sm btn-dark">Xem</a>
                                 </td>
@@ -94,21 +94,28 @@
     </div>
 </section>
 
-<script>
-    function DeleteProduct(id) {
-        var conf = confirm('Bạn có muốn xóa bản ghi này không?');
-        if (conf === true) {
-            $.ajax({
-                url: '/posts/delete',
-                type: 'POST',
-                data: { id: id },
-                success: function (rs) {
-                    if (rs.success === true) {
-                        $('#trow_' + id).remove();
-                    }
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data('id');
+                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+                if (conf === true) {
+                    $.ajax({
+                        url: 'delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success === true) {
+                                $('#trow_' + id).fadeTo('fast', 0.5, function () {
+                                    $(this).slideUp('fast', function () { $(this).remove(); });
+                                });
+                            }
+                        }
+                    });
                 }
             });
-        }
-    }
-</script>
+        });
+    </script>    
+}
 

@@ -1,10 +1,8 @@
 ﻿@model eMartHoangMinh.Models.FE.Product
 @{
-    ViewBag.Title = "Thêm sản phẩm";
+    ViewBag.Title = "Cập nhật sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Content/ckeditor/ckeditor.js"></script>
-<script src="~/Content/ckfinder/ckfinder.js"></script>
 
 @section leftNavbar{
     <ul class="navbar-nav">
@@ -18,7 +16,7 @@
             <a href="/admin/products" class="nav-link">Sản phẩm</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link active">Thêm sản phẩm</a>
+            <a href="#" class="nav-link active">Sửa sản phẩm</a>
         </li>
     </ul>
 }
@@ -28,13 +26,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Thêm sản phẩm</h1>
+                <h1>Sửa sản phẩm</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="/admin/products">Sản phẩm</a></li>
-                    <li class="breadcrumb-item active">Thêm sản phẩm</li>
+                    <li class="breadcrumb-item active">Sửa sản phẩm</li>
                 </ol>
             </div>
         </div>
@@ -48,10 +46,13 @@
             <h3 class="card-title">Thông tin sản phẩm</h3>
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { }))
+            @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.ProductCategory)
+                @Html.HiddenFor(x => x.CreateDate)
                 <div class="bs-stepper-content">
                     <div class="card">
                         <div class="card-header p-2">
@@ -93,7 +94,7 @@
                                             <div class="form-group">
                                                 <label for="Quantity">Số lượng</label>
                                                 <div class="input-group">
-                                                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control", @type = "number", @Value="1", @id = "inputQuantity", @rows = "4" })
+                                                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control", @type = "number", @Value = "1", @id = "inputQuantity", @rows = "4" })
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">.0</span>
                                                     </div>
@@ -122,15 +123,6 @@
                                                         <span class="input-group-text">đ</span>
                                                     </div>
                                                 </div>
-                                                @*<div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                    @Html.TextBoxFor(x => x.PriceSale, new { @class = "form-control", @type = "number", @placeholder = "Giá sale", @id = "inputPriceSale", @rows = "4" })
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">.00</span>
-                                                    </div>
-                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +173,6 @@
                                 <div class="tab-pane" id="productImage">
                                     <div class="row">
                                         <div class="col-md-12 text-right">
-                                            @*<input type="button" class="btn btn-primary" id="iTaiAnh" onclick="BrowserServer()" value="Tải ảnh" />*@
                                             <input type="button" class="btn btn-primary" id="iTaiAnh" value="Tải ảnh" />
                                         </div>
                                         <div class="col-md-12">
@@ -195,6 +186,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbHtml">
+                                                    @if (Model != null && Model.ProductImages != null && Model.ProductImages.Any())
+                                                    {
+                                                        var i = 0;
+                                                        foreach (var image in Model.ProductImages)
+                                                        {
+                                                            <tr class="text-center" id="trow_" + @image.Id>
+                                                                <td>@(i + 1)</td>
+                                                                <td><img width="80" src="@image.Image" /><input type="hidden" value="@image.Image" name="Images" /></td>
+                                                                <td><input type="radio" value=@(i + 1) checked="@image.IsDefault" name="rdDefault" /></td>
+                                                                <td><a href="#" data-id=@image.Id class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
                                                 </tbody>
                                             </table>
                                             <input type="hidden" id="tCurrentId" value="0" />
@@ -239,7 +244,7 @@
             $('#demoPrice').bind('blur focusout keypress keyup', function () {
                 var demoGet = $('#demoPrice').autoNumeric('get');
                 $('#Price').val(demoGet);
-                $('#Price').autoNumeric('set',demoGet);
+                $('#Price').autoNumeric('set', demoGet);
             });
 
             $('#demoPriceSale').autoNumeric('init');
@@ -276,78 +281,17 @@
                 var temp = $('#tCurrentId').val();
                 var currentId = parseInt(temp) + 1;
                 var str = "";
-                if (currentId == 1) {
-                    str += `<tr class="text-center" id="trow_${currentId}">
-                <td>${currentId}</td >
-                <td><img width="80" src="${url}"/><input type="hidden" value="${url}" name="Images"/></td>
-                <td><input type="radio" value=${currentId} checked="checked" name="rdDefault" /></td>
-                <td><a href="#" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-                </tr>`;
-                }
-                else {
-                    str += `<tr class="text-center" id="trow_${currentId}">
-                <td>${currentId}</td >
-                <td><img width="80" src="${url}"/><input type="hidden" value="${url}" name="Images"/></td>
-                <td><input type="radio" value=${currentId} name="rdDefault" /></td>
-                <td><a href="#" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-                </tr>`;
-                }
+                str += `<tr class="text-center" id="trow_${currentId}">
+                        <td>${currentId}</td >
+                        <td><img width="80" src="${url}"/><input type="hidden" value="${url}" name="Images"/></td>
+                        <td><input type="radio" value=${currentId} name="rdDefault" /></td>
+                        <td><a href="#" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                        </tr>`;
                 $('#tbHtml').append(str);
                 $('#tCurrentId').val(currentId);
             }
 
         });
-    </script>    
+    </script>
 }
-
-@*<script>
-
-    function BrowserServer(field) {
-        var finder = new CKFinder();
-        finder.selectActionFunction = function (fieldUrl) {
-            //document.getElementById(field).value = fieldUrl;
-            addImageProduct(fieldUrl);
-        };
-        finder.popup();
-    }
-
-
-    function addImageProduct(url) {
-        var temp = $('#tCurrentId').val();
-        var currentId = parseInt(temp) + 1;
-        var str = "";
-        if (currentId == 1) {
-            str += `<tr class="text-center" id="trow_${currentId}">
-                <td>${currentId}</td >
-                <td><img width="80" src="${url}"/></td>
-                <td><input type="radio" value=${currentId} checked="checked" name="rDefault" /></td>
-                <td><a href="#" onclick="deleteImage(${currentId})" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-                </tr>`;
-        }
-        else {
-            str += `<tr class="text-center" id="trow_${currentId}">
-                <td>${currentId}</td >
-                <td><img width="80" src="${url}"/></td>
-                <td><input type="radio" name="rDefault" /></td>
-                <td><a href="#" onclick="deleteImage(${currentId})" data-id=${currentId} class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-                </tr>`;
-        }
-        $('#tbHtml').append(str);
-        $('#tCurrentId').val(currentId);
-    }
-
-    function deleteImage(id) {
-        var conf = confirm('Bạn có muốn xóa ảnh này không?');
-        if (conf === true) {
-            $('#trow_' + id).fadeTo('fast', 0.5, function () {
-                $(this).slideUp('fast', function () { $(this).remove(); });
-            });
-            var temp = $('#tCurrentId').val();
-            var currentId = parseInt(temp);
-            $('#tCurrentId').val(currentId);
-        }
-    }
-
-
-</script>*@
 

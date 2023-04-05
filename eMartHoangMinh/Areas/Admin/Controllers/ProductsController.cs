@@ -70,16 +70,43 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
         }
         public ActionResult Edit(int id)
         {
-            return View();
+            var product = _db.Products.Find(id);
+            ViewBag.ProductCategory = new SelectList(_db.ProductCategories.ToList(), "Id", "Name");
+            product.ProductImages = _db.ProductImages.Where(x => x.ProductId == product.Id).ToList();
+            return View(product);
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, List<string> Images, List<int> rdDefault)
         {
             try
             {
-                // TODO: Add update logic here
-
+                product.UpdateDate = DateTime.Now;
+                var imageIndex = -1;
+                if (ModelState.IsValid)
+                {
+                    if (Images != null && Images.Count > 0)
+                    {
+                        for (int i = 0; i < Images.Count; i++)
+                        {
+                            var productImage = new ProductImage()
+                            {
+                                ProductId = product.Id,
+                                Image = Images[i]
+                            };
+                            if (i + 1 == rdDefault[0])
+                            {
+                                productImage.IsDefault = true;
+                                imageIndex = i;
+                            }
+                            _db.ProductImages.Add(productImage);
+                        }
+                    }
+                    product.Image = imageIndex >= 0 ? Images[imageIndex] : "";
+                    _db.Products.Add(product);
+                    _db.SaveChanges();
+                }
+                ViewBag.ProductCategory = new SelectList(_db.ProductCategories.ToList(), "Id", "Name");
                 return RedirectToAction("Index");
             }
             catch
@@ -91,10 +118,18 @@ namespace eMartHoangMinh.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var post = _db.Posts.Find(id);
-            if (post != null)
+            var product = _db.Products.Find(id);
+            if (product != null)
             {
-                _db.Posts.Remove(post);
+                _db.Products.Remove(product);
+                var imgs = _db.ProductImages.Where(x => x.ProductId == product.Id).ToList();
+                if (imgs != null)
+                {
+                    foreach (var img in imgs)
+                    {
+                        _db.ProductImages.Remove(img);
+                    }
+                }
                 _db.SaveChanges();
                 return Json(new { success = true });
             }
